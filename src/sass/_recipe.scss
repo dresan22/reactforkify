@@ -1,10 +1,13 @@
 .recipe {
   background-color: $color-grey-light-1;
-
+  grid-area: recipe;
+  flex-direction: column;
+  overflow: scroll;
+  overflow-x: hidden;
   ///////////
   // FIGURE
   &__fig {
-    height: 20rem;
+    height: 15vh;
     position: relative;
     // transform: scale(1.04) translateY(-1px);
     transform-origin: top;
@@ -24,14 +27,12 @@
       );
       opacity: 0.6;
     }
-    // background-color: chartreuse;
   }
 
   &__img {
     width: 100%;
     display: block;
     height: 100%;
-    // object-fit: fill;
     object-fit: cover;
   }
 
@@ -69,8 +70,7 @@
   &__details {
     display: flex;
     align-items: center;
-    padding: 2.5rem 8rem;
-    height: 15%;
+    padding: 7.5rem 8rem 3.5rem 8rem;
   }
 
   &__info {
@@ -125,7 +125,6 @@
   ///////////
   // INGREDIENTS
   &__ingredients {
-    height: 20%;
     padding: 5rem 8rem;
     font-size: 1.6rem;
     line-height: 1.4;
@@ -163,7 +162,6 @@
   ///////////
   // DIRECTIONS
   &__directions {
-    // height: 10%;
     padding: 5rem 10rem;
     padding-bottom: 5rem;
     display: flex;

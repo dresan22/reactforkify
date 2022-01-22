@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Pagination = () => {
+function Pagination() {
   return (
     <div className='pagination'>
       <button className='btn--inline pagination__btn--prev'>
@@ -17,6 +17,6 @@ const Pagination = () => {
       </button>
     </div>
   );
-};
+}
 
 export default Pagination;

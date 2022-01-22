@@ -1,13 +1,14 @@
 import React from 'react';
+import icons from '../../img/icons.svg';
 
-const Navbar = () => {
+function Navbar() {
   return (
     <nav className='nav'>
       <ul className='nav__list'>
         <li className='nav__item'>
           <button className='nav__btn nav__btn--add-recipe'>
             <svg className='nav__icon'>
-              <use href='src/img/icons.svg#icon-edit'></use>
+              <use href={icons + '#icon-edit'}></use>
             </svg>
             <span>Add recipe</span>
           </button>
@@ -15,7 +16,7 @@ const Navbar = () => {
         <li className='nav__item'>
           <button className='nav__btn nav__btn--bookmarks'>
             <svg className='nav__icon'>
-              <use href='src/img/icons.svg#icon-bookmark'></use>
+              <use href={icons + '#icon-bookmark'}></use>
             </svg>
             <span>Bookmarks</span>
           </button>
@@ -35,6 +36,6 @@ const Navbar = () => {
       </ul>
     </nav>
   );
-};
+}
 
 export default Navbar;

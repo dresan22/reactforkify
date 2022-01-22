@@ -1,17 +1,25 @@
 .search-results {
-  padding: 3rem 0;
+  // padding: 1rem 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  // grid-area: lista;
+  // height: 100%;
+  // background-color: blueviolet;
+  // position: relative;s
+  // background-color: #ccc;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 .results {
   list-style: none;
-  margin-bottom: 2rem;
+  // margin-bottom: 2rem;
+  // height: 80vh;
 }
 
 .pagination {
-  margin-top: auto;
+  position: absolute;
+  bottom: 0px;
   padding: 0 3.5rem;
 
   &::after {
@@ -35,9 +43,11 @@
   font-size: 1.2rem;
   padding: 0 3.5rem;
   margin-top: 4rem;
-  // background-color: black;
   // position: absolute;
-  // top: 70vh;
+  // bottom: 0px;
+  text-align: center;
+  width: 100%;
+
   .twitter-link:link,
   .twitter-link:visited {
     color: $color-grey-dark-2;
