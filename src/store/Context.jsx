@@ -1,7 +1,6 @@
 import { createContext, useReducer, useContext, useState } from 'react';
 import recipeReducer, { initialState } from './reducer';
-import { RECIPE_STATE_EMPTY } from './config';
-import { INIT_LIST_STRING } from './config';
+import { RECIPE_STATE_EMPTY, INIT_LIST_STRING } from '../utils/constants';
 
 export const RecipeContext = createContext({ initialState });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logo from '../../img/logo.png';
+import logo from '../../assets/img/logo.png';
 import Searchbox from '../Searchbox/Searchbox';
 import Navbar from './../Navbar/Navbar';
 

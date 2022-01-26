@@ -1,6 +1,6 @@
 import React from 'react';
 import './sass/main.scss';
-import { RecipeProvider } from './Helper/Context';
+import { RecipeProvider } from './store/Context';
 
 import Header from './components/Header/Header';
 import Container from './components/Container/Container';

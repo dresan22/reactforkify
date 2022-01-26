@@ -1,6 +1,6 @@
 import React from 'react';
-import icons from './../../img/icons.svg';
-import useRecipe from '../../Helper/Context';
+import icons from '../../assets/img/icons.svg';
+import useRecipe from '../../store/Context';
 
 function Bookmarks() {
   const { bookmarks, setRecipe } = useRecipe();
