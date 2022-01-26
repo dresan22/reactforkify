@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Recipe from '../Recipe/Recipe';
 import SearchResults from '../SearchResults/SearchResults';
-import { INIT_URL, API_URL, ERROR_MESSAGE } from '../../Helper/config';
-import useRecipe from '../../Helper/Context';
+import { INIT_URL, API_URL, ERROR_MESSAGE } from '../../utils/constants';
+import useRecipe from '../../store/Context';
 
 function Container() {
   const { query, setRecipe, url } = useRecipe();
@@ -11,6 +11,14 @@ function Container() {
 
   const [recipeResults, setRecipeResults] = useState([]);
   const [error, setError] = useState(false);
+  //TODO: Investigate about react-hook-forms
+  //TODO: Install React Material UI
+  //TODO: Implement Skeleton
+  //TODO: Create Portal to show the Modal
+  //TODO: Implement Toast/Alert for error and success
+  //TODO: Create a state for the loading logic and toasts
+  //FIXME: Refactor useEffect logic in different functions
+  //TODO: Refactor components abstraction
 
   useEffect(() => {
     console.log('rendering');
@@ -19,11 +27,17 @@ function Container() {
       try {
         const {
           data: {
-            data: { recipe },
+            data: { recipe = undefined },
             status,
           },
         } = await axios(url || INIT_URL);
-        setRecipe(recipe);
+
+        if (status !== 'success') {
+          setError('error');
+          return;
+        }
+
+        if(recipe) setRecipe(recipe);
 
         const {
           data: {
@@ -36,10 +50,7 @@ function Container() {
             return el;
           })
         );
-        if (status !== 'success') {
-          setError('error');
-          return;
-        }
+
       } catch (err) {
         console.warn(err);
         setError(true);
