@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import ModalImage from 'react-modal-image';
 import icons from '../../img/icons.svg';
+import useRecipe from '../../Helper/Context';
 
 function Recipe({ props }) {
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const { bookmarks, addBookmark, removeBookmark } = useRecipe();
+
   const {
     title,
     image_url,
@@ -12,6 +17,37 @@ function Recipe({ props }) {
     id,
     cooking_time,
   } = props;
+
+  useEffect(() => {
+    const isBookmarked = bookmarks.find((recipe) => {
+      return recipe.title === title;
+    });
+
+    if (isBookmarked) {
+      setIsBookmarked(true);
+    } else {
+      setIsBookmarked(false);
+    }
+  }, [bookmarks, title]);
+
+  const handleBookmarkClick = () => {
+    const recipe = {
+      title,
+      image_url,
+      ingredients,
+      publisher,
+      servings,
+      source_url,
+      id,
+      cooking_time,
+    };
+
+    if (isBookmarked) {
+      removeBookmark(recipe);
+    } else {
+      addBookmark(recipe);
+    }
+  };
 
   const ingr =
     ingredients &&
@@ -29,10 +65,15 @@ function Recipe({ props }) {
         </li>
       );
     });
+  const [openImg, setOpenImg] = useState(false);
+  const handleShow = () => {
+    setOpenImg(!openImg);
+    console.log('click', openImg);
+  };
 
   return (
     <div className='recipe' key={id}>
-      <figure className='recipe__fig'>
+      <figure className='recipe__fig ' onClick={handleShow}>
         <img src={image_url} alt={title} className='recipe__img' />
         <h1 className='recipe__title'>
           <span>{title}</span>
@@ -76,9 +117,15 @@ function Recipe({ props }) {
             <use href={icons + '#icon-user'}></use>
           </svg>
         </div>
-        <button className='btn--round'>
+        <button className='btn--round' onClick={handleBookmarkClick}>
           <svg className=''>
-            <use href={icons + '#icon-bookmark-fill'}></use>
+            <use
+              href={
+                !isBookmarked
+                  ? icons + '#icon-bookmark'
+                  : icons + '#icon-bookmark-fill'
+              }
+            ></use>
           </svg>
         </button>
       </div>

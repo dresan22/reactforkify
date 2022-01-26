@@ -6,10 +6,11 @@
   overflow-x: hidden;
   ///////////
   // FIGURE
+
   &__fig {
-    height: 15vh;
+    height: 32rem;
     position: relative;
-    // transform: scale(1.04) translateY(-1px);
+    transform: scale(1.04) translateY(-1px);
     transform-origin: top;
 
     &::before {
@@ -25,7 +26,7 @@
         $color-grad-1,
         $color-grad-2
       );
-      opacity: 0.6;
+      opacity: 0.5;
     }
   }
 
@@ -179,4 +180,18 @@
   &__publisher {
     font-weight: 700;
   }
+}
+
+.showImg {
+  box-shadow: 0 8px 6px -6px black;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  // opacity: 1;
+  // width: 50vw;
+  // overflow: visible;
+  // min-width: 50vw;
+  min-height: 50vh;
+  // z-index: 0;
 }

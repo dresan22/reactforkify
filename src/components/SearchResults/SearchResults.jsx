@@ -1,12 +1,15 @@
-import React, { useCallback } from 'react';
+import React, { useContext } from 'react';
 import icons from '../../img/icons.svg';
-import Container from '../Container/Container';
+import { RecipeContext } from '../../Helper/Context';
 
 function SearchResults({ props, recipeChange }) {
+  const { query, setQuery } = useContext(RecipeContext);
+
   //TODO: entender por que no funciona el bind
 
   function handleClick() {
     recipeChange(this);
+    setQuery(query);
   }
 
   return (
@@ -19,7 +22,7 @@ function SearchResults({ props, recipeChange }) {
               key={recipe.id}
               onClick={handleClick.bind(recipe)}
             >
-              <a className='preview__link preview__link--active' href='#1'>
+              <a className='preview__link preview__link--active' href='#0'>
                 <figure className='preview__fig'>
                   <img src={recipe.image_url} alt='Test' />
                 </figure>

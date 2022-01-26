@@ -2,16 +2,24 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Recipe from '../Recipe/Recipe';
 import SearchResults from '../SearchResults/SearchResults';
-import { QueryContext } from '../../Helper/Context';
-import { INIT_URL, API_URL, RECIPE_STATE_EMPTY } from '../../Helper/config';
+import { RecipeContext } from '../../Helper/Context';
+import {
+  INIT_URL,
+  API_URL,
+  RECIPE_STATE_EMPTY,
+  ERROR_MESSAGE,
+} from '../../Helper/config';
+import useRecipe from '../../Helper/Context';
 
 function Container() {
-  const { query } = useContext(QueryContext);
+  const { bookmarks } = useRecipe();
+  const { query, recipe, setRecipe } = useContext(RecipeContext);
   const queryURL = `${API_URL}?search=${query}`;
 
   const [url, setUrl] = useState('');
   const [recipeResults, setRecipeResults] = useState([]);
-  const [recipe, setRecipe] = useState(RECIPE_STATE_EMPTY);
+  // const [recipe, setRecipe] = useState(RECIPE_STATE_EMPTY);
+  const [error, sestError] = useState(false);
 
   useEffect(() => {
     console.log('rendering');
@@ -37,13 +45,13 @@ function Container() {
             return el;
           })
         );
-        console.log('aslkdfjlasjdflkjsl');
         if (status !== 'success') {
           // setError('error');
           return;
         }
-      } catch (error) {
-        console.log('error');
+      } catch (err) {
+        console.warn(err);
+        sestError(true);
       }
     };
 
@@ -53,11 +61,11 @@ function Container() {
   function handleResults(newRecipe) {
     setUrl(`https://forkify-api.herokuapp.com/api/v2/recipes/${newRecipe.id}/`);
   }
-
+  //TODO: mejorar error handling
   return (
     <div className='separator'>
       <SearchResults props={recipeResults} recipeChange={handleResults} />
-      <Recipe props={recipe} />
+      {error ? ERROR_MESSAGE : <Recipe props={recipe} />}
     </div>
   );
 }

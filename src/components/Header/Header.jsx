@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../sass/main.scss';
 import logo from '../../img/logo.png';
-import Searchbox from './Searchbox';
-import Navbar from './Navbar';
+import Searchbox from '../Searchbox/Searchbox';
+import Navbar from './../Navbar/Navbar';
 
 function Header() {
   return (
