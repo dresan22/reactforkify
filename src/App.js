@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
+import './sass/main.scss';
 import { RecipeProvider } from './Helper/Context';
 
-import './App.css';
 import Header from './components/Header/Header';
 import Container from './components/Container/Container';
 

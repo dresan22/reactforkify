@@ -1,9 +1,9 @@
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import icons from '../../img/icons.svg';
-import { RecipeContext } from '../../Helper/Context';
+import useRecipe from '../../Helper/Context';
 
 function Searchbox() {
-  const { setQuery } = useContext(RecipeContext);
+  const { setQuery } = useRecipe();
   const queryString = useRef();
 
   const handleSearch = (e) => {

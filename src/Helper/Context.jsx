@@ -1,12 +1,12 @@
 import { createContext, useReducer, useContext, useState } from 'react';
 import recipeReducer, { initialState } from './reducer';
 import { RECIPE_STATE_EMPTY } from './config';
-
 import { INIT_LIST_STRING } from './config';
 
 export const RecipeContext = createContext({ initialState });
 
 export const RecipeProvider = ({ children }) => {
+  const [url, setUrl] = useState('');
   const [query, setQuery] = useState(INIT_LIST_STRING);
   const [recipe, setRecipe] = useState(RECIPE_STATE_EMPTY);
   const [state, dispatch] = useReducer(recipeReducer, initialState);
@@ -35,6 +35,10 @@ export const RecipeProvider = ({ children }) => {
     });
   };
 
+  function handleResults(newRecipe) {
+    setUrl(`https://forkify-api.herokuapp.com/api/v2/recipes/${newRecipe.id}/`);
+  }
+
   const value = {
     bookmarks: state.bookmarks,
     removeBookmark,
@@ -43,6 +47,9 @@ export const RecipeProvider = ({ children }) => {
     setQuery,
     recipe,
     setRecipe,
+    handleResults,
+    url,
+    setUrl,
   };
 
   return (

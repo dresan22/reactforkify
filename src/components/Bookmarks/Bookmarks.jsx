@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import icons from './../../img/icons.svg';
 import useRecipe from '../../Helper/Context';
-import { RecipeContext } from '../../Helper/Context';
 
 function Bookmarks() {
-  const { setRecipe } = useContext(RecipeContext);
-  const { bookmarks } = useRecipe();
+  const { bookmarks, setRecipe } = useRecipe();
   function handleBookmarkClick() {
     setRecipe(this);
   }

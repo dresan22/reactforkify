@@ -1,15 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import icons from '../../img/icons.svg';
-import { RecipeContext } from '../../Helper/Context';
+import useRecipe from '../../Helper/Context';
 
-function SearchResults({ props, recipeChange }) {
-  const { query, setQuery } = useContext(RecipeContext);
+function SearchResults({ props }) {
+  const { handleResults } = useRecipe();
 
   //TODO: entender por que no funciona el bind
 
   function handleClick() {
-    recipeChange(this);
-    setQuery(query);
+    handleResults(this);
   }
 
   return (

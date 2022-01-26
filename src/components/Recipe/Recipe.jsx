@@ -3,9 +3,9 @@ import ModalImage from 'react-modal-image';
 import icons from '../../img/icons.svg';
 import useRecipe from '../../Helper/Context';
 
-function Recipe({ props }) {
+function Recipe() {
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const { bookmarks, addBookmark, removeBookmark } = useRecipe();
+  const { bookmarks, addBookmark, removeBookmark, recipe } = useRecipe();
 
   const {
     title,
@@ -16,7 +16,7 @@ function Recipe({ props }) {
     source_url,
     id,
     cooking_time,
-  } = props;
+  } = recipe;
 
   useEffect(() => {
     const isBookmarked = bookmarks.find((recipe) => {
@@ -133,7 +133,7 @@ function Recipe({ props }) {
         <h2 className='heading--2'>Recipe ingredients</h2>
 
         <ul className='recipe__ingredient-list'>
-          {ingr || 'no hay ingredientes'}
+          {ingr || 'There are no ingredients'}
         </ul>
       </div>
       <div className='recipe__directions'>
