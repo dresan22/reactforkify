@@ -9,6 +9,7 @@ export const RecipeProvider = ({ children }) => {
   const [query, setQuery] = useState(INIT_LIST_STRING);
   const [recipe, setRecipe] = useState(RECIPE_STATE_EMPTY);
   const [state, dispatch] = useReducer(recipeReducer, initialState);
+  const [loading, setLoading] = useState(false);
 
   const addBookmark = (recipe) => {
     const updatedBookmarks = state.bookmarks.concat(recipe);
@@ -49,6 +50,8 @@ export const RecipeProvider = ({ children }) => {
     handleResults,
     url,
     setUrl,
+    loading,
+    setLoading,
   };
 
   return (

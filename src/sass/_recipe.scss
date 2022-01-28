@@ -39,6 +39,7 @@
 
   &__title {
     position: absolute;
+    cursor: pointer;
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 20%) skewY(-6deg);
@@ -180,18 +181,4 @@
   &__publisher {
     font-weight: 700;
   }
-}
-
-.showImg {
-  box-shadow: 0 8px 6px -6px black;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  // opacity: 1;
-  // width: 50vw;
-  // overflow: visible;
-  // min-width: 50vw;
-  min-height: 50vh;
-  // z-index: 0;
 }

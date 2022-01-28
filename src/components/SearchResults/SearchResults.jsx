@@ -1,9 +1,10 @@
 import React from 'react';
 import icons from '../../assets/img/icons.svg';
 import useRecipe from '../../store/Context';
+import SkeletonResults from '../SkeletonResults/SkeletonResults';
 
 function SearchResults({ props }) {
-  const { handleResults } = useRecipe();
+  const { handleResults, loading } = useRecipe();
 
   //TODO: entender por que no funciona el bind
 
@@ -14,8 +15,10 @@ function SearchResults({ props }) {
   return (
     <div className='search-results'>
       <ul className='results'>
-        {props.map((recipe) => {
-          return (
+        {(loading ? Array.from(new Array(6)) : props).map((recipe, i) =>
+          !recipe ? (
+            <SkeletonResults key={i} />
+          ) : (
             <li
               className='preview'
               key={recipe.id}
@@ -36,8 +39,8 @@ function SearchResults({ props }) {
                 </div>
               </a>
             </li>
-          );
-        })}
+          )
+        )}
       </ul>
     </div>
   );

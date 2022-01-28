@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import icons from '../../assets/img/icons.svg';
 import useRecipe from '../../store/Context';
-import ModalImageRecipe from '../Modal/ModalImageRecipe'
+import ModalImageRecipe from '../Modal/ModalImageRecipe';
 
 function Recipe() {
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -75,13 +75,7 @@ function Recipe() {
   return (
     <>
       <div className='recipe' key={id}>
-        <ModalImageRecipe/>
-        {/* <figure className='recipe__fig ' onClick={handleShow}>
-        <img src={image_url} alt={title} className='recipe__img' />
-        <h1 className='recipe__title'>
-          <span>{title}</span>
-        </h1>
-      </figure> */}
+        <ModalImageRecipe />
         <div className='recipe__details'>
           <div className='recipe__info'>
             <svg className='recipe__info-icon'>
@@ -143,10 +137,14 @@ function Recipe() {
           <h2 className='heading--2'>How to cook it</h2>
           <p className='recipe__directions-text'>
             This recipe was carefully designed and tested by
-            <span className='recipe__publisher'> {publisher}</span>. Please check
-            out directions at their website.
+            <span className='recipe__publisher'> {publisher}</span>. Please
+            check out directions at their website.
           </p>
-          <a className='btn--small recipe__btn' href={source_url} target='blank'>
+          <a
+            className='btn--small recipe__btn'
+            href={source_url}
+            target='blank'
+          >
             <span>Directions</span>
             <svg className='search__icon'>
               <use href={icons + '#icon-arrow-right'}></use>

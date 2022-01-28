@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Recipe from '../Recipe/Recipe';
 import SearchResults from '../SearchResults/SearchResults';
+import SkeletonResults from '../SkeletonResults/SkeletonResults';
 import { INIT_URL, API_URL, ERROR_MESSAGE } from '../../utils/constants';
 import useRecipe from '../../store/Context';
+import { Skeleton } from '@mui/material';
+import AlertToast from '../AlertToast/AlertToast';
 
 function Container() {
-  const { query, setRecipe, url } = useRecipe();
+  const { query, setRecipe, url, loading, setLoading } = useRecipe();
   const queryURL = `${API_URL}?search=${query}`;
 
   const [recipeResults, setRecipeResults] = useState([]);
   const [error, setError] = useState(false);
+  const [error2, setError2] = useState(false);
   //TODO: Investigate about react-hook-forms
-  //TODO: Install React Material UI
   //TODO: Implement Skeleton
   //TODO: Create Portal to show the Modal
   //TODO: Implement Toast/Alert for error and success
@@ -21,7 +24,8 @@ function Container() {
   //TODO: Refactor components abstraction
 
   useEffect(() => {
-    console.log('rendering');
+    setLoading(true);
+    setError2(false);
 
     const fetchData = async () => {
       try {
@@ -37,33 +41,43 @@ function Container() {
           return;
         }
 
-        if(recipe) setRecipe(recipe);
+        if (recipe) setRecipe(recipe);
 
         const {
           data: {
             data: { recipes },
+
+            results,
           },
         } = await axios(queryURL);
 
-        setRecipeResults(
-          recipes.map((el) => {
-            return el;
-          })
-        );
+        if (results === 0) {
+          setError2(true);
+          return;
+        }
 
+        if (recipes)
+          setRecipeResults(
+            recipes.map((el) => {
+              return el;
+            })
+          );
       } catch (err) {
         console.warn(err);
+
         setError(true);
       }
+      setLoading(false);
     };
 
     fetchData();
-  }, [setRecipe, queryURL, url]);
+  }, [setRecipe, queryURL, url, setRecipeResults, setLoading]);
 
   //TODO: mejorar error handling
   return (
     <div className='separator'>
-      <SearchResults props={recipeResults} />
+      {error2 ? <AlertToast /> : <SearchResults props={recipeResults} />}
+
       {error ? ERROR_MESSAGE : <Recipe />}
     </div>
   );
