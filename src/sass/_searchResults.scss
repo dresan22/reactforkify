@@ -39,12 +39,14 @@
 }
 
 .copyright {
+  position: absolute;
+  bottom: 5px;
+
   color: $color-grey-dark-2;
-  font-size: 1.2rem;
+  color: #fff;
+  font-size: 1.5rem;
   padding: 0 3.5rem;
   margin-top: 4rem;
-  // position: absolute;
-  // bottom: 0px;
   text-align: center;
   width: 100%;
 

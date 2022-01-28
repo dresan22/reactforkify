@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import icons from '../../assets/img/icons.svg';
 import useRecipe from '../../store/Context';
 import SkeletonResults from '../SkeletonResults/SkeletonResults';
 
 function SearchResults({ props }) {
-  const { handleResults, loading } = useRecipe();
-
-  //TODO: entender por que no funciona el bind
+  const { handleResults, loading, setRecipeLoading } = useRecipe();
+  const [currentRecipe, setCurrentRecipe] = useState('');
 
   function handleClick() {
+    if (currentRecipe.title === this.title) return;
+    setCurrentRecipe(this);
     handleResults(this);
+    setRecipeLoading(true);
   }
 
   return (

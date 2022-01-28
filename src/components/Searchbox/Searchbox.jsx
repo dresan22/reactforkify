@@ -3,14 +3,18 @@ import icons from '../../assets/img/icons.svg';
 import useRecipe from '../../store/Context';
 
 function Searchbox() {
-  const { setQuery, loading, setLoading } = useRecipe();
+  const { setQuery, setLoading, query } = useRecipe();
   const queryString = useRef();
 
   const handleSearch = (e) => {
     e.preventDefault();
+
+    if (query === queryString.current.value) return;
+
     setQuery(queryString.current.value);
-    queryString.current.value = '';
     setLoading(true);
+
+    queryString.current.value = '';
   };
   //TODO: por que onClick y no onSubmit?
   return (

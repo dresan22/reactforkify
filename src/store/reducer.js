@@ -8,15 +8,11 @@ const recipeReducer = (state, action) => {
 
   switch (type) {
     case 'ADD_BOOKMARK':
-      // console.log('ADD_BOOKMARK reducer', payload);
-
       return {
         ...state,
         bookmarks: payload.bookmarks,
       };
     case 'REMOVE_BOOKMARK':
-      // console.log('REMOVE_BOOKMARK reducer', payload);
-
       return {
         ...state,
         bookmarks: payload.bookmarks,

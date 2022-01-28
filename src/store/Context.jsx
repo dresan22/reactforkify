@@ -11,9 +11,11 @@ export const RecipeProvider = ({ children }) => {
   const [state, dispatch] = useReducer(recipeReducer, initialState);
   const [loading, setLoading] = useState(false);
 
+  //loading single recipe state
+  const [recipeLoading, setRecipeLoading] = useState(true);
+
   const addBookmark = (recipe) => {
     const updatedBookmarks = state.bookmarks.concat(recipe);
-    console.log('adding bookmark', updatedBookmarks);
 
     dispatch({
       type: 'ADD_BOOKMARK',
@@ -25,7 +27,6 @@ export const RecipeProvider = ({ children }) => {
     const updatedBookmarks = state.bookmarks.filter(
       (currentRecipe) => currentRecipe.title !== recipe.title
     );
-    console.log('removing bookmark', updatedBookmarks);
 
     dispatch({
       type: 'REMOVE_BOOKMARK',
@@ -39,7 +40,7 @@ export const RecipeProvider = ({ children }) => {
     setUrl(`https://forkify-api.herokuapp.com/api/v2/recipes/${newRecipe.id}/`);
   }
 
-  const value = {
+  const systemVariables = {
     bookmarks: state.bookmarks,
     removeBookmark,
     addBookmark,
@@ -52,10 +53,14 @@ export const RecipeProvider = ({ children }) => {
     setUrl,
     loading,
     setLoading,
+    recipeLoading,
+    setRecipeLoading,
   };
 
   return (
-    <RecipeContext.Provider value={value}>{children}</RecipeContext.Provider>
+    <RecipeContext.Provider value={systemVariables}>
+      {children}
+    </RecipeContext.Provider>
   );
 };
 

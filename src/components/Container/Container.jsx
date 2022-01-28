@@ -8,23 +8,19 @@ import useRecipe from '../../store/Context';
 import AlertToast from '../AlertToast/AlertToast';
 
 function Container() {
-  const { query, setRecipe, url, setLoading } = useRecipe();
+  const { query, setRecipe, url, setLoading, recipeLoading, setRecipeLoading } =
+    useRecipe();
   const queryURL = `${API_URL}?search=${query}`;
 
   const [recipeResults, setRecipeResults] = useState([]);
   const [error, setError] = useState(false);
   const [errorResults, setErrorResults] = useState(false);
   //TODO: Investigate about react-hook-forms
-  //TODO: Implement Skeleton
-  //TODO: Create Portal to show the Modal
-  //TODO: Implement Toast/Alert for error and success
-  //TODO: Create a state for the loading logic and toasts
+
   //FIXME: Refactor useEffect logic in different functions
   //TODO: Refactor components abstraction
 
   useEffect(() => {
-    setLoading(true);
-
     setErrorResults(false);
 
     const fetchData = async () => {
@@ -41,7 +37,10 @@ function Container() {
           return;
         }
 
-        if (recipe) setRecipe(recipe);
+        if (recipe) {
+          setRecipe(recipe);
+          setRecipeLoading(false);
+        }
 
         const {
           data: {
@@ -56,14 +55,15 @@ function Container() {
           return;
         }
 
-        if (recipes)
+        if (recipes) {
           setRecipeResults(
             recipes.map((el) => {
               return el;
             })
           );
+          setLoading(true);
+        }
       } catch (err) {
-        console.warn(err);
         setErrorResults(true);
         setError(true);
       }
@@ -71,9 +71,15 @@ function Container() {
     };
 
     fetchData();
-  }, [setRecipe, queryURL, url, setRecipeResults, setLoading]);
+  }, [
+    setRecipe,
+    queryURL,
+    url,
+    setRecipeResults,
+    setLoading,
+    setRecipeLoading,
+  ]);
 
-  //TODO: mejorar error handling
   return (
     <div className='separator'>
       {errorResults ? <AlertToast /> : <SearchResults props={recipeResults} />}
