@@ -1,6 +1,6 @@
 export const API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes/';
 export const INIT_URL = `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886`;
-export const INIT_LIST_STRING = 'cake';
+export const INIT_LIST_STRING = 'arepa';
 export const RECIPE_STATE_EMPTY = {
   title: '',
   image_url: '',
