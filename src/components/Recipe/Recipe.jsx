@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Ingredients from '../Ingredients/Ingredients';
 import ModalImageRecipe from '../Modal/ModalImageRecipe';

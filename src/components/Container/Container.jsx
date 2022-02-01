@@ -8,8 +8,7 @@ import useRecipe from '../../store/Context';
 import AlertToast from '../AlertToast/AlertToast';
 
 function Container() {
-  const { query, setRecipe, url, setLoading, recipeLoading, setRecipeLoading } =
-    useRecipe();
+  const { query, setRecipe, url, setLoading, setRecipeLoading } = useRecipe();
   const queryURL = `${API_URL}?search=${query}`;
 
   const [recipeResults, setRecipeResults] = useState([]);
@@ -18,7 +17,6 @@ function Container() {
   //TODO: Investigate about react-hook-forms
 
   //FIXME: Refactor useEffect logic in different functions
-  //TODO: Refactor components abstraction
 
   useEffect(() => {
     setErrorResults(false);

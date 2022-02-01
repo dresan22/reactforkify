@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import icons from '../../assets/img/icons.svg';
 import useRecipe from '../../store/Context';
 
 function Bookmarks() {
-  const { bookmarks, setRecipe } = useRecipe();
+  const { bookmarks, setRecipe, savedBookmarks, setSavedBookmarks } =
+    useRecipe();
   function handleBookmarkClick() {
     setRecipe(this);
   }

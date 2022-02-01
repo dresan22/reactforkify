@@ -1,6 +1,7 @@
 import { createContext, useReducer, useContext, useState } from 'react';
 import recipeReducer, { initialState } from './reducer';
 import { RECIPE_STATE_EMPTY, INIT_LIST_STRING } from '../utils/constants';
+import { useLocalStorage } from '../components/useLocalStorage/useLocalStorage';
 
 export const RecipeContext = createContext({ initialState });
 
@@ -10,6 +11,11 @@ export const RecipeProvider = ({ children }) => {
   const [recipe, setRecipe] = useState(RECIPE_STATE_EMPTY);
   const [state, dispatch] = useReducer(recipeReducer, initialState);
   const [loading, setLoading] = useState(false);
+
+  const [savedBookmarks, setSavedBookmarks] = useLocalStorage(
+    'savedbookmarks',
+    []
+  );
 
   //loading single recipe state
   const [recipeLoading, setRecipeLoading] = useState(true);
@@ -36,6 +42,15 @@ export const RecipeProvider = ({ children }) => {
     });
   };
 
+  const setBookmarks = () => {
+    // const updatedBookmarks = state.savedBookmarks;
+
+    dispatch({
+      type: 'SET_SAVED_BOOKMARKS',
+      payload: { bookmarks: savedBookmarks },
+    });
+  };
+
   function handleResults(newRecipe) {
     setUrl(`https://forkify-api.herokuapp.com/api/v2/recipes/${newRecipe.id}/`);
   }
@@ -55,6 +70,9 @@ export const RecipeProvider = ({ children }) => {
     setLoading,
     recipeLoading,
     setRecipeLoading,
+    savedBookmarks,
+    setSavedBookmarks,
+    setBookmarks,
   };
 
   return (

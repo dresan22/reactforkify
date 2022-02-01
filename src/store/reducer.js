@@ -17,6 +17,11 @@ const recipeReducer = (state, action) => {
         ...state,
         bookmarks: payload.bookmarks,
       };
+    case 'SET_SAVED_BOOKMARKS':
+      return {
+        ...state,
+        bookmarks: payload.bookmarks,
+      };
 
     default:
       throw new Error(`No case for type ${type} found in recipeReducer.`);

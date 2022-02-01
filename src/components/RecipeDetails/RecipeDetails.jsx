@@ -2,9 +2,18 @@ import React, { useState, useEffect } from 'react';
 import useRecipe from '../../store/Context';
 import icons from '../../assets/img/icons.svg';
 
-function RecipeDetails(props) {
+function RecipeDetails() {
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const { bookmarks, addBookmark, removeBookmark, recipe } = useRecipe();
+
+  const {
+    bookmarks,
+    addBookmark,
+    removeBookmark,
+    recipe,
+    savedBookmarks,
+    setSavedBookmarks,
+    setBookmarks,
+  } = useRecipe();
 
   const {
     title,
@@ -18,6 +27,14 @@ function RecipeDetails(props) {
   } = recipe;
 
   useEffect(() => {
+    setBookmarks();
+  }, []);
+
+  useEffect(() => {
+    console.log('rendering');
+
+    if (bookmarks.length !== 0) setSavedBookmarks(bookmarks);
+
     const isBookmarked = bookmarks.find((recipe) => {
       return recipe.title === title;
     });
@@ -27,7 +44,7 @@ function RecipeDetails(props) {
     } else {
       setIsBookmarked(false);
     }
-  }, [bookmarks, title]);
+  }, [bookmarks, title, setSavedBookmarks, setBookmarks]);
 
   const handleBookmarkClick = () => {
     const recipe = {
