@@ -4,12 +4,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media only screen and (max-width: $bp-small) {
+    // height: 100px;
+  }
 
   &__logo {
     margin-left: 4rem;
     height: 4.6rem;
     display: block;
     cursor: pointer;
+    @media only screen and (max-width: $bp-medium) {
+      height: 4rem;
+      margin-left: 1rem;
+    }
   }
 }
 
@@ -20,6 +27,9 @@
   align-items: center;
   padding-left: 3rem;
   transition: all 0.3s;
+  @media only screen and (max-width: $bp-medium) {
+    margin-left: 2rem;
+  }
 
   &:focus-within {
     transform: translateY(-2px);
@@ -33,6 +43,10 @@
     color: inherit;
     font-size: 1.7rem;
     width: 30rem;
+    @media only screen and (max-width: $bp-small) {
+      // margin-left: 2rem;
+      width: 15rem;
+    }
 
     &:focus {
       outline: none;
@@ -43,7 +57,7 @@
     }
 
     @media only screen and (max-width: $bp-medium) {
-      width: auto;
+      // width: auto;
 
       &::placeholder {
         color: white;
@@ -60,6 +74,9 @@
 .nav {
   align-self: stretch;
   margin-right: 2.5rem;
+  @media only screen and (max-width: $bp-small) {
+    display: none;
+  }
 
   &__list {
     list-style: none;

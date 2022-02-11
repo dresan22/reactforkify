@@ -7,6 +7,9 @@
   // background-color: blueviolet;
   // position: relative;s
   // background-color: #ccc;
+  @media only screen and (max-width: $bp-large) {
+    // flex-direction: row;
+  }
   overflow: scroll;
   overflow-x: hidden;
 }
@@ -15,26 +18,8 @@
   list-style: none;
   // margin-bottom: 2rem;
   // height: 80vh;
-}
-
-.pagination {
-  position: absolute;
-  bottom: 0px;
-  padding: 0 3.5rem;
-
-  &::after {
-    content: '';
-    display: table;
-    clear: both;
-  }
-
-  &__btn {
-    &--prev {
-      float: left;
-    }
-    &--next {
-      float: right;
-    }
+  @media only screen and (max-width: $bp-small) {
+    display: none;
   }
 }
 
@@ -49,6 +34,10 @@
   margin-top: 4rem;
   text-align: center;
   width: 100%;
+  @media only screen and (max-width: $bp-large) {
+    background-color: green;
+    display: none;
+  }
 
   .twitter-link:link,
   .twitter-link:visited {
